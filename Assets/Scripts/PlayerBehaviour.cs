@@ -84,11 +84,9 @@ public class PlayerBehaviour : MonoBehaviour
 		// Calculate target movement direction based on player's orientation
 		Vector3 targetMoveDirection = (transform.right * moveX + transform.forward * moveZ).normalized * moveSpeed;
 
-		// Smooth movement
-		moveDirection = Vector3.SmoothDamp(moveDirection, targetMoveDirection, ref smoothMoveVelocity, 0.1f);
-
-		// Move the player
-		controller.Move(moveDirection * Time.deltaTime);
+		 // Use a longer smooth time when in air for gradual deceleration
+		float smoothTime = isGrounded ? 0.1f : 0.3f;
+		moveDirection = Vector3.SmoothDamp(moveDirection, targetMoveDirection, ref smoothMoveVelocity, smoothTime);
 
 		// Jump
 		if (Input.GetButtonDown("Jump") && isGrounded)
@@ -99,8 +97,9 @@ public class PlayerBehaviour : MonoBehaviour
 		// Gravity
 		velocity.y += gravity * Time.deltaTime;
 
-		// Apply vertical movement separately
-		controller.Move(new Vector3(0, velocity.y, 0) * Time.deltaTime);
+		 // Combine horizontal smooth movement with vertical velocity
+		Vector3 finalMoveDirection = new Vector3(moveDirection.x, velocity.y, moveDirection.z);
+		controller.Move(finalMoveDirection * Time.deltaTime);
 	}
 
 	void HandleMouseLook()
