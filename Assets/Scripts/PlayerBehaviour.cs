@@ -40,15 +40,10 @@ public class PlayerBehaviour : MonoBehaviour
 			Debug.LogError("CharacterController component not found.");
 		}
 
-		cameraTransform = GetComponentInChildren<Camera>()?.transform;
+		cameraTransform = GetComponent<Camera>()?.transform;
 		if (cameraTransform == null)
 		{
-			Debug.LogError("No camera found as a child of the player. Please ensure the Main Camera is a child of the player.");
-		}
-		else
-		{
-			// Initialize camera rotation to look at eye level
-			cameraTransform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+			Debug.LogError("Camera component not found on the Player GameObject.");
 		}
 
 		// Lock and hide the cursor
@@ -114,13 +109,11 @@ public class PlayerBehaviour : MonoBehaviour
 		float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
 
 		// Rotate player horizontally
-		transform.Rotate(Vector3.up * mouseX);
-
-		// Rotate camera vertically
 		xRotation -= mouseY;
-		xRotation = Mathf.Clamp(xRotation, -maxLookAngle, maxLookAngle);
+    	xRotation = Mathf.Clamp(xRotation, -maxLookAngle, maxLookAngle);
 
-		cameraTransform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+
+    	transform.rotation = Quaternion.Euler(xRotation, transform.eulerAngles.y + mouseX, 0f);
 	}
 
 	void OnDrawGizmos()
