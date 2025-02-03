@@ -10,6 +10,8 @@ public class PlayerBehaviour : MonoBehaviour
 	[SerializeField] private float moveSpeed = 5.0f;
 	[SerializeField] private float gravity = -9.81f;
 	[SerializeField] private float jumpHeight = 1.5f;
+	[SerializeField] private float smoothTimeGrounded = 0.1f;
+	[SerializeField] private float smoothTimeAir = 0.3f;
 
 	private Vector3 velocity;
 	private Vector3 moveDirection;
@@ -18,8 +20,6 @@ public class PlayerBehaviour : MonoBehaviour
 	[Header("Mouse Look Properties")]
 	[SerializeField] private float mouseSensitivity = 10.0f;
 	[SerializeField] private float maxLookAngle = 90.0f;
-
-	private float xRotation = 0.0f;
 
 	void Start()
 	{
@@ -53,7 +53,7 @@ public class PlayerBehaviour : MonoBehaviour
 		Vector3 targetMoveDirection = (transform.right * moveX + transform.forward * moveZ).normalized * moveSpeed;
 
 		// Use a longer smooth time when in air for gradual deceleration
-		float smoothTime = controller.isGrounded ? 0.1f : 0.3f;
+		float smoothTime = controller.isGrounded ? smoothTimeGrounded : smoothTimeAir;
 		moveDirection = Vector3.SmoothDamp(moveDirection, targetMoveDirection, ref smoothMoveVelocity, smoothTime);
 
 		if (Input.GetButtonDown("Jump") && controller.isGrounded)
@@ -70,14 +70,11 @@ public class PlayerBehaviour : MonoBehaviour
 
 	void HandleMouseLook()
 	{
-
+		//Input internally uses deltaTime already
 		float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
 		float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
 
-		xRotation -= mouseY;
-		xRotation = Mathf.Clamp(xRotation, -maxLookAngle, maxLookAngle);
-
-		transform.rotation = Quaternion.Euler(xRotation, transform.eulerAngles.y + mouseX, 0);
+		transform.rotation = Quaternion.Euler(transform.eulerAngles.x - mouseY, transform.eulerAngles.y + mouseX, 0);
 	}
 
 }
