@@ -51,10 +51,14 @@ public class PlayerController : MonoBehaviour
 
 	void Update()
 	{
-		if(isInventoryOpen)
+		if (isInventoryOpen)
 		{
 			HandleInventoryInput();
 			return;
+		}
+		if(inputManager.GetUseInput())
+		{
+			UseSelectedItem();
 		}
 		HandleHotbarInput();
 		HandleInventoryInput();
@@ -163,5 +167,16 @@ public class PlayerController : MonoBehaviour
 	{
 		Cursor.lockState = CursorLockMode.None;
 		Cursor.visible = true;
+	}
+	void UseSelectedItem()
+	{
+		// Get the selected item from the inventory
+		InventoryItem selectedItem = inventoryManager.GetCurrentItem();
+		if (selectedItem == null || selectedItem.itemData == null)
+		{
+			Debug.Log("No item selected.");
+			return;
+		}
+		Debug.Log("Using item: " + selectedItem.itemData.itemName);
 	}
 }
