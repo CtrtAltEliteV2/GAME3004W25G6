@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 	private InputManager inputManager;
 	private PlayerStats playerStats;
 	private InventoryManager inventoryManager;
+	private bool isInventoryOpen = false;
 
 	[Header("Movement Properties")]
 	[SerializeField] private float moveSpeed = 5.0f;
@@ -29,16 +30,12 @@ public class PlayerController : MonoBehaviour
 		inputManager = GetComponent<InputManager>();
 		playerStats = GetComponent<PlayerStats>();
 		inventoryManager = GetComponent<InventoryManager>();
-
 		if (controller == null)
 			Debug.LogError("CharacterController component not found.");
 
 		if (heldItemParent == null)
 			Debug.LogError("HeldItemParent GameObject is not assigned in the Inspector.");
 
-		// Lock and hide the cursor
-		Cursor.lockState = CursorLockMode.Locked;
-		Cursor.visible = false;
 
 		velocity = Vector3.zero;
 		moveDirection = Vector3.zero;
@@ -49,10 +46,16 @@ public class PlayerController : MonoBehaviour
 		{
 			inventoryManager.InitializeInventoryUI();
 		}
+		LockCursor();
 	}
 
 	void Update()
 	{
+		if(isInventoryOpen)
+		{
+			HandleInventoryInput();
+			return;
+		}
 		HandleHotbarInput();
 		HandleInventoryInput();
 		HandleMovement();
@@ -62,6 +65,15 @@ public class PlayerController : MonoBehaviour
 	{
 		if (inputManager.GetInventoryInput())
 		{
+			isInventoryOpen = !isInventoryOpen;
+			if (isInventoryOpen)
+			{
+				UnlockCursor();
+			}
+			else
+			{
+				LockCursor();
+			}
 			inventoryManager.ToggleExtendedInventory();
 		}
 	}
@@ -78,7 +90,7 @@ public class PlayerController : MonoBehaviour
 	{
 		if (inventoryManager == null)
 		{
-			Debug.LogError("InventoryUIManager is not assigned.");
+			Debug.LogError("InventoryManager is not assigned.");
 			return;
 		}
 
@@ -101,11 +113,14 @@ public class PlayerController : MonoBehaviour
 
 		// Get the InventoryItem from the selected slot and instantiate its prefab if available
 		InventoryItem selectedItem = inventoryManager.GetItemInHotbar(index);
-		if (selectedItem != null && selectedItem.itemPrefab != null)
+		if (selectedItem != null &&
+			selectedItem.itemData != null &&
+			selectedItem.itemData.itemPrefab != null)
 		{
-			Instantiate(selectedItem.itemPrefab, heldItemParent.transform);
+			Instantiate(selectedItem.itemData.itemPrefab, heldItemParent.transform);
 		}
 	}
+
 
 	void HandleMovement()
 	{
@@ -138,5 +153,15 @@ public class PlayerController : MonoBehaviour
 	{
 		Vector2 mouseDelta = inputManager.GetMouseLookInput();
 		transform.rotation = Quaternion.Euler(transform.eulerAngles.x - mouseDelta.y, transform.eulerAngles.y + mouseDelta.x, 0);
+	}
+	void LockCursor()
+	{
+		Cursor.lockState = CursorLockMode.Locked;
+		Cursor.visible = false;
+	}
+	void UnlockCursor()
+	{
+		Cursor.lockState = CursorLockMode.None;
+		Cursor.visible = true;
 	}
 }

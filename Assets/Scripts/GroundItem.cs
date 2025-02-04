@@ -3,7 +3,7 @@ using UnityEngine;
 public class GroundItem : MonoBehaviour
 {
 	// Reference to the InventoryItem ScriptableObject representing this item.
-	public InventoryItem item;
+	public InventoryItemData item;
 
 	private void OnTriggerEnter(Collider other)
 	{
