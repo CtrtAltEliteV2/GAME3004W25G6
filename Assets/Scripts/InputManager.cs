@@ -42,8 +42,13 @@ public class InputManager : MonoBehaviour
 		return -1;
 	}
 
-	internal bool GetInventoryInput()
+	public bool GetInventoryInput()
 	{
 		return Input.GetKeyDown(KeyCode.I);
 	}
+	public bool GetUseInput()
+	{
+		return Input.GetMouseButtonDown(0);
+	}
+
 }

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Pickaxe
   itemDescription: Used for mining
-  itemIcon: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  itemIcon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   itemPrefab: {fileID: 100000, guid: f74757c500e925a42abf94e55dee8610, type: 3}
