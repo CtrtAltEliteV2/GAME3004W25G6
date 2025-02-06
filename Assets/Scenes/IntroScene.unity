@@ -20,8 +20,8 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
-  m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
+  m_AmbientSkyColor: {r: 0.49236962, g: 0.68282646, b: 0.99415976, a: 1}
+  m_AmbientEquatorColor: {r: 0.49236962, g: 0.68282646, b: 0.99415976, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 0
@@ -12879,6 +12879,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1247893981}
   - component: {fileID: 1247893980}
+  - component: {fileID: 1247893982}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -12897,7 +12898,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 0.49236962, g: 0.68282646, b: 0.99415976, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -12956,13 +12957,118 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1247893979}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalRotation: {x: 0.5336145, y: 0, z: 0, w: 0.84572786}
+  m_LocalPosition: {x: 0, y: 16.72, z: 1.44}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &1247893982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247893979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 140cedc274fbda94bba0821f86ebd44a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sun: {fileID: 1247893980}
+  timeOfDay: 10.3
+  sunRotationSpeed: 3
+  skyColor:
+    serializedVersion: 2
+    key0: {r: 0.2880514, g: 0.26072446, b: 0.8773585, a: 1}
+    key1: {r: 0.9150943, g: 0.54806095, b: 0.038848326, a: 1}
+    key2: {r: 0.25, g: 0.53466606, b: 1, a: 0}
+    key3: {r: 0.9823529, g: 0.9823529, b: 0.9823529, a: 0}
+    key4: {r: 0.2688679, g: 0.6778702, b: 1, a: 0}
+    key5: {r: 0.8301887, g: 0.46577176, b: 0.11356357, a: 0}
+    key6: {r: 0.17515129, g: 0.31592467, b: 0.9056604, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 5397
+    ctime1: 15613
+    ctime2: 25829
+    ctime3: 32768
+    ctime4: 39899
+    ctime5: 51850
+    ctime6: 60909
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 7
+    m_NumAlphaKeys: 2
+  equatorColor:
+    serializedVersion: 2
+    key0: {r: 0.2880514, g: 0.26072446, b: 0.8773585, a: 1}
+    key1: {r: 0.9150943, g: 0.54806095, b: 0.038848326, a: 1}
+    key2: {r: 0.25, g: 0.53466606, b: 1, a: 0}
+    key3: {r: 0.9823529, g: 0.9823529, b: 0.9823529, a: 0}
+    key4: {r: 0.2688679, g: 0.6778702, b: 1, a: 0}
+    key5: {r: 0.8301887, g: 0.46577176, b: 0.11356357, a: 0}
+    key6: {r: 0.17515129, g: 0.31592467, b: 0.9056604, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 5397
+    ctime1: 15613
+    ctime2: 25829
+    ctime3: 32768
+    ctime4: 39899
+    ctime5: 51850
+    ctime6: 60909
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 7
+    m_NumAlphaKeys: 2
+  sunColor:
+    serializedVersion: 2
+    key0: {r: 0.2880514, g: 0.26072446, b: 0.8773585, a: 1}
+    key1: {r: 0.9150943, g: 0.54806095, b: 0.038848326, a: 1}
+    key2: {r: 0.25, g: 0.53466606, b: 1, a: 0}
+    key3: {r: 0.9823529, g: 0.9823529, b: 0.9823529, a: 0}
+    key4: {r: 0.2688679, g: 0.6778702, b: 1, a: 0}
+    key5: {r: 0.8301887, g: 0.46577176, b: 0.11356357, a: 0}
+    key6: {r: 0.17515129, g: 0.31592467, b: 0.9056604, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 5397
+    ctime1: 15613
+    ctime2: 25829
+    ctime3: 32768
+    ctime4: 39899
+    ctime5: 51850
+    ctime6: 60909
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 7
+    m_NumAlphaKeys: 2
 --- !u!1001 &1254910894
 PrefabInstance:
   m_ObjectHideFlags: 0
