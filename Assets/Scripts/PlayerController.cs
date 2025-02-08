@@ -198,7 +198,7 @@ public class PlayerController : MonoBehaviour
 	}
 	void LoadGame()
 	{
-		SaveManager.LoadGame(this);
+		SaveManager.LoadGame(this, playerStats, inventoryManager);
 	}
 	public void ResetMovement()
 	{

@@ -50,7 +50,7 @@ public static class SaveManager
 
 		Debug.Log("Game saved to " + saveFilePath);
 	}
-	public static void LoadGame(PlayerController player)
+	public static void LoadGame(PlayerController player, PlayerStats stats, InventoryManager inventoryManager)
 	{
 		if (File.Exists(saveFilePath))
 		{
@@ -72,9 +72,17 @@ public static class SaveManager
 				playerData.rotation[2]
 			);
 			player.transform.eulerAngles = rotation;
+			
+			player.ResetMovement();
+			if (stats != null && playerData.stats != null)
+			{
+				stats.Health = playerData.stats.health;
+				stats.Hunger = playerData.stats.hunger;
+				stats.Thirst = playerData.stats.thirst;
+				stats.Stamina = playerData.stats.stamina;
+			}
 
 			// Reset movement variables
-			player.ResetMovement();
 			player.EnableCharacterController();
 
 			Debug.Log("Game loaded from " + saveFilePath);
