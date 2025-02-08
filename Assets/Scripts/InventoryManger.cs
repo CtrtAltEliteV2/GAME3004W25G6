@@ -10,7 +10,7 @@ public class InventoryManager : MonoBehaviour
 	private GameObject extendedPanel;
 	private int selectedHotbarSlot = -1;
 
-	private Inventory inventory;
+	public Inventory inventory;
 	private const int HOTBAR_COUNT = 10;
 	private const int EXTENDED_COUNT = 24;
 
@@ -179,5 +179,9 @@ public class InventoryManager : MonoBehaviour
 	public void SwapSlotItems(int indexA, int indexB)
 	{
 		inventory.SwapItems(indexA, indexB);
+	}
+	public InventoryItemData[] GetInventoryItemData()
+	{
+		return inventory.GetItemData();
 	}
 }

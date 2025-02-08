@@ -51,20 +51,33 @@ public class PlayerController : MonoBehaviour
 
 	void Update()
 	{
+		if (Input.GetKeyDown(KeyCode.O))
+		{
+			SaveGame();
+			return; // Prevent further processing in this frame
+		}
+		else if (Input.GetKeyDown(KeyCode.P))
+		{
+			LoadGame();
+			return; // Prevent further processing in this frame
+		}
+
 		if (isInventoryOpen)
 		{
 			HandleInventoryInput();
 			return;
 		}
-		if(inputManager.GetUseInput())
+		if (inputManager.GetUseInput())
 		{
 			UseSelectedItem();
 		}
+
 		HandleHotbarInput();
 		HandleInventoryInput();
 		HandleMovement();
 		HandleMouseLook();
 	}
+
 	void HandleInventoryInput()
 	{
 		if (inputManager.GetInventoryInput())
@@ -178,5 +191,28 @@ public class PlayerController : MonoBehaviour
 			return;
 		}
 		Debug.Log("Using item: " + selectedItem.itemData.itemName);
+	}
+	void SaveGame()
+	{
+		SaveManager.SaveGame(this, playerStats, inventoryManager.GetInventoryItemData());
+	}
+	void LoadGame()
+	{
+		SaveManager.LoadGame(this);
+	}
+	public void ResetMovement()
+	{
+		velocity = Vector3.zero;
+		moveDirection = Vector3.zero;
+		smoothMoveVelocity = Vector3.zero;
+	}
+	public void DisableCharacterController()
+	{
+		controller.enabled = false;
+	}
+
+	public void EnableCharacterController()
+	{
+		controller.enabled = true;
 	}
 }

@@ -68,6 +68,10 @@ public class Inventory
 		OnInventoryChanged?.Invoke();
 	}
 
+	public InventoryItemData[] GetItemData()
+	{
+		return items;
+	}
 	public int TotalSize => totalSize;
 	public int HotbarSize => hotbarSize;
 }
