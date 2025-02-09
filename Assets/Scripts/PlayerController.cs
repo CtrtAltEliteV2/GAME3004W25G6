@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
@@ -23,6 +24,15 @@ public class PlayerController : MonoBehaviour
 	[Header("Inventory & Held Item")]
 	[Tooltip("The parent GameObject under which the held item prefab will be instantiated.")]
 	[SerializeField] private GameObject heldItemParent;
+	
+	//Properties for the pause menu, button to open the pause menu, and the pause menu itself
+	//This is more like a temporary implementation, will be replaced with a more robust system later and on a different script.
+	[Header("Pause Menu")]
+	[SerializeField] private GameObject pauseMenu;
+	[SerializeField] private Button resumeButton;
+	[SerializeField] private Button optionsButton;
+	[SerializeField] private Button mainMenuButton;
+	private bool isPaused = false;
 
 	void Start()
 	{
@@ -47,6 +57,9 @@ public class PlayerController : MonoBehaviour
 			inventoryManager.InitializeInventoryUI();
 		}
 		LockCursor();
+		
+		// Add onClick to the resume button, this will be changed to a proper touch button input later
+		resumeButton.onClick.AddListener(ResumeGame);
 	}
 
 	void Update()
@@ -76,6 +89,7 @@ public class PlayerController : MonoBehaviour
 		HandleInventoryInput();
 		HandleMovement();
 		HandleMouseLook();
+		HandlePauseMenu();
 	}
 
 	void HandleInventoryInput()
@@ -168,6 +182,8 @@ public class PlayerController : MonoBehaviour
 
 	void HandleMouseLook()
 	{
+		if (isPaused) return; //To prevent the player camera from moving around if paused.
+		
 		Vector2 mouseDelta = inputManager.GetMouseLookInput();
 		transform.rotation = Quaternion.Euler(transform.eulerAngles.x - mouseDelta.y, transform.eulerAngles.y + mouseDelta.x, 0);
 	}
@@ -215,4 +231,39 @@ public class PlayerController : MonoBehaviour
 	{
 		controller.enabled = true;
 	}
+
+	#region Pause and Menu Buttons
+
+	void HandlePauseMenu()
+	{
+		if (Input.GetKeyDown(KeyCode.Tab))
+		{
+			if (isPaused)
+			{
+				pauseMenu.SetActive(false);
+				LockCursor();
+				isPaused = false;
+				Time.timeScale = 1;
+			}
+			else
+			{
+				pauseMenu.SetActive(true);
+				UnlockCursor();
+				isPaused = true;
+				Time.timeScale = 0;
+			}
+		}
+	}
+	
+	public void ResumeGame()
+	{
+		pauseMenu.SetActive(false);
+		LockCursor();
+		isPaused = false;
+		Time.timeScale = 1;
+	}
+	
+	
+
+	#endregion
 }
