@@ -1,3 +1,4 @@
+// PlayerController.cs
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -138,7 +139,7 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-	void RemoveHeldItems()
+	public void RemoveHeldItems()
 	{
 		if (heldItemParent != null)
 		{
@@ -218,6 +219,10 @@ public class PlayerController : MonoBehaviour
 	void LoadGame()
 	{
 		SaveManager.LoadGame(this, playerStats, inventoryManager);
+		// **Ensure no item is selected after loading**
+		// This is already handled in SaveManager.LoadGame by setting selectedHotbarSlot to -1
+		// Additionally, remove any held items to reflect the deselection
+		RemoveHeldItems();
 	}
 	public void ResetMovement()
 	{

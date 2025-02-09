@@ -1,3 +1,4 @@
+// SaveManager.cs
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -125,8 +126,8 @@ public static class SaveManager
 
 			// Load Inventory.
 			inventoryManager.LoadInventoryFromSaveData(gameData.inventory);
-			// Reapply equipped hotbar slot.
-			inventoryManager.SetSelectedHotbarSlot(gameData.player.equippedSlot);
+			// **Set selectedHotbarSlot to -1 to ensure no item is selected upon loading.**
+			inventoryManager.SetSelectedHotbarSlot(-1);
 
 			// Remove existing ground items.
 			GroundItem[] existingGroundItems = GameObject.FindObjectsOfType<GroundItem>();
@@ -150,7 +151,6 @@ public static class SaveManager
 					{
 						var collider = obj.AddComponent<SphereCollider>();
 						collider.isTrigger = true;
-
 					}
 
 					// Ensure GroundItem script is linked
@@ -166,7 +166,10 @@ public static class SaveManager
 					Debug.LogWarning("Item not found for ID: " + giData.itemID);
 				}
 			}
-			inventoryManager.SetSelectedHotbarSlot(-1);
+
+			// **Ensure no item is selected upon loading by removing held items.**
+			player.RemoveHeldItems();
+
 			player.EnableCharacterController();
 			Debug.Log("Game loaded from " + saveFilePath);
 		}
