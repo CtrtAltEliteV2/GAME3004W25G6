@@ -9,7 +9,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler
 	public InventoryItem currentItem;
 	public Image highLightBorder;
 
-	public void SetSlotItemData(InventoryItemData data)
+	public void SetSlotItemData(ItemData data)
 	{
 		if (currentItem != null)
 		{

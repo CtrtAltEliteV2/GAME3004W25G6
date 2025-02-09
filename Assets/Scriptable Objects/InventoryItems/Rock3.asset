@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 56419010da9da12489fabdf0ad8402ed, type: 3}
-  m_Name: Pickaxe
+  m_Name: Rock3
   m_EditorClassIdentifier: 
-  itemID: 989d2918-4953-43b5-abae-19a4c4433f97
-  itemName: Pickaxe
-  itemDescription: Used for mining
-  itemIcon: {fileID: 21300000, guid: b03c62ab4e7c0b54fb54be3bde9b1a21, type: 3}
-  itemPrefab: {fileID: 4899291284461531402, guid: c6279b2c7a8393c4aa6612ad4eb7fa76,
-    type: 3}
+  itemID: dd85862d-02e5-4e48-9ecb-44e988e60a67
+  itemName: Rock3
+  itemDescription: Rock3
+  itemIcon: {fileID: 21300000, guid: be87b6225532a7b4a98a04f78c390313, type: 3}
+  itemPrefab: {fileID: 1814908095977450, guid: d22ed9070aa985a46b58ca203aca1549, type: 3}
