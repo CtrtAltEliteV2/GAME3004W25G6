@@ -1,5 +1,13 @@
 using System;
 using UnityEngine;
+[Serializable]
+public class PlayerStatsSaveData
+{
+	public float health;
+	public float hunger;
+	public float thirst;
+	public float stamina;
+}
 
 public class PlayerStats : MonoBehaviour
 {

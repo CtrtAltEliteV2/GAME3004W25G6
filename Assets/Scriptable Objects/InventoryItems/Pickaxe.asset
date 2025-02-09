@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03fe39fc279f52047af86bb9ed0574c3, type: 3}
   m_Name: Pickaxe
   m_EditorClassIdentifier: 
+  itemID: 989d2918-4953-43b5-abae-19a4c4433f97
   itemName: Pickaxe
   itemDescription: Used for mining
   itemIcon: {fileID: 21300000, guid: b03c62ab4e7c0b54fb54be3bde9b1a21, type: 3}

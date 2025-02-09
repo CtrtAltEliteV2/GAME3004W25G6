@@ -36,7 +36,6 @@ public class PlayerController : MonoBehaviour
 		if (heldItemParent == null)
 			Debug.LogError("HeldItemParent GameObject is not assigned in the Inspector.");
 
-
 		velocity = Vector3.zero;
 		moveDirection = Vector3.zero;
 		smoothMoveVelocity = Vector3.zero;
@@ -51,6 +50,7 @@ public class PlayerController : MonoBehaviour
 
 	void Update()
 	{
+		// The saving and loading functions can be called from anywhere. They are just here as a placeholder.
 		if (Input.GetKeyDown(KeyCode.O))
 		{
 			SaveGame();
@@ -94,12 +94,23 @@ public class PlayerController : MonoBehaviour
 			inventoryManager.ToggleExtendedInventory();
 		}
 	}
+
 	void HandleHotbarInput()
 	{
 		int slotInput = inputManager.GetHotbarSlotInput();
 		if (slotInput != -1)
 		{
-			SelectHotbarSlot(slotInput);
+			if (inventoryManager.selectedHotbarSlot == slotInput)
+			{
+				// Deselect the currently selected slot
+				inventoryManager.SetSelectedHotbarSlot(-1);
+				RemoveHeldItems();
+			}
+			else
+			{
+				// Select a new slot
+				SelectHotbarSlot(slotInput);
+			}
 		}
 	}
 
@@ -115,18 +126,7 @@ public class PlayerController : MonoBehaviour
 		inventoryManager.SetSelectedHotbarSlot(index);
 
 		// Remove any previously held item
-		if (heldItemParent != null)
-		{
-			foreach (Transform child in heldItemParent.transform)
-			{
-				Destroy(child.gameObject);
-			}
-		}
-		else
-		{
-			Debug.LogError("HeldItemParent GameObject is not assigned.");
-			return;
-		}
+		RemoveHeldItems();
 
 		// Get the InventoryItem from the selected slot and instantiate its prefab if available
 		InventoryItem selectedItem = inventoryManager.GetItemInHotbar(index);
@@ -138,6 +138,20 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
+	void RemoveHeldItems()
+	{
+		if (heldItemParent != null)
+		{
+			foreach (Transform child in heldItemParent.transform)
+			{
+				Destroy(child.gameObject);
+			}
+		}
+		else
+		{
+			Debug.LogError("HeldItemParent GameObject is not assigned.");
+		}
+	}
 
 	void HandleMovement()
 	{
@@ -171,16 +185,19 @@ public class PlayerController : MonoBehaviour
 		Vector2 mouseDelta = inputManager.GetMouseLookInput();
 		transform.rotation = Quaternion.Euler(transform.eulerAngles.x - mouseDelta.y, transform.eulerAngles.y + mouseDelta.x, 0);
 	}
+
 	void LockCursor()
 	{
 		Cursor.lockState = CursorLockMode.Locked;
 		Cursor.visible = false;
 	}
+
 	void UnlockCursor()
 	{
 		Cursor.lockState = CursorLockMode.None;
 		Cursor.visible = true;
 	}
+
 	void UseSelectedItem()
 	{
 		// Get the selected item from the inventory
@@ -192,9 +209,11 @@ public class PlayerController : MonoBehaviour
 		}
 		Debug.Log("Using item: " + selectedItem.itemData.itemName);
 	}
+
+	// The saving and loading functions can be called from anywhere. They are just here as a placeholder.
 	void SaveGame()
 	{
-		SaveManager.SaveGame(this, playerStats, inventoryManager.GetInventoryItemData());
+		SaveManager.SaveGame(this, playerStats, inventoryManager);
 	}
 	void LoadGame()
 	{
