@@ -34,7 +34,7 @@ public class PauseMenu : MonoBehaviour
     
     void Start()
     {
-        
+        isPaused = false;
         playerController = FindObjectOfType<PlayerController>();
         if (playerController == null)
         {

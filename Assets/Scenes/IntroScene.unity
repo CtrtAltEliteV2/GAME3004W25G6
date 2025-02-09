@@ -5397,18 +5397,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 388535358}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &401061959 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1885030289142140946, guid: 9844c90f35ce1394c91e546536590807,
-    type: 3}
-  m_PrefabInstance: {fileID: 5143481283525267969}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &403551414
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32985,6 +32973,7 @@ GameObject:
   - component: {fileID: 2144034273}
   - component: {fileID: 2144034272}
   - component: {fileID: 2144034271}
+  - component: {fileID: 2144034278}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -33104,10 +33093,6 @@ MonoBehaviour:
   smoothTimeGrounded: 0.1
   smoothTimeAir: 0.3
   heldItemParent: {fileID: 275384609}
-  pauseMenu: {fileID: 1467750635}
-  resumeButton: {fileID: 1149587119}
-  optionsButton: {fileID: 401061959}
-  mainMenuButton: {fileID: 146967166}
 --- !u!143 &2144034276
 CharacterController:
   m_ObjectHideFlags: 0
@@ -33150,6 +33135,22 @@ Transform:
   - {fileID: 275384610}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2144034278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2144034270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a440b8f29ef6c764da9091255f4bfcdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenu: {fileID: 1467750635}
+  resumeButton: {fileID: 1149587119}
+  optionsButton: {fileID: 0}
+  mainMenuButton: {fileID: 146967166}
 --- !u!1001 &2145713492
 PrefabInstance:
   m_ObjectHideFlags: 0
