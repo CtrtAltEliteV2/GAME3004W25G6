@@ -27,14 +27,6 @@ public class PlayerController : MonoBehaviour
 	[Tooltip("The parent GameObject under which the held item prefab will be instantiated.")]
 	[SerializeField] private GameObject heldItemParent;
 	
-	//Properties for the pause menu, button to open the pause menu, and the pause menu itself
-	//This is more like a temporary implementation, will be replaced with a more robust system later and on a different script.
-	[Header("Pause Menu")]
-	[SerializeField] private GameObject pauseMenu;
-	[SerializeField] private Button resumeButton;
-	[SerializeField] private Button optionsButton;
-	[SerializeField] private Button mainMenuButton;
-	private bool isPaused = false;
 	
 	private bool isWalking = false;
 	private Coroutine footstepCoroutine;
@@ -62,10 +54,6 @@ public class PlayerController : MonoBehaviour
 			inventoryManager.InitializeInventoryUI();
 		}
 		LockCursor();
-		
-		// Add onClick to the resume button and main menu button, this will be changed to a proper touch button input later
-		resumeButton.onClick.AddListener(ResumeGame);
-		mainMenuButton.onClick.AddListener(LoadMainMenu);
 	}
 
 	void Update()
@@ -95,7 +83,15 @@ public class PlayerController : MonoBehaviour
 		HandleInventoryInput();
 		HandleMovement();
 		HandleMouseLook();
-		HandlePauseMenu();
+		HandlePauseMenuInput();
+	}
+    
+	void HandlePauseMenuInput()
+	{
+		if (Input.GetKeyDown(KeyCode.Tab))
+		{
+			PauseMenu.Instance.TogglePauseMenu();
+		}
 	}
 
 	void HandleInventoryInput()
@@ -219,17 +215,17 @@ public class PlayerController : MonoBehaviour
 
 	void HandleMouseLook()
 	{
-		if (isPaused) return; //To prevent the player camera from moving around if paused.
+		if (PauseMenu.isPaused) return; //To prevent the player camera from moving around if paused.
 		
 		Vector2 mouseDelta = inputManager.GetMouseLookInput();
 		transform.rotation = Quaternion.Euler(transform.eulerAngles.x - mouseDelta.y, transform.eulerAngles.y + mouseDelta.x, 0);
 	}
-	void LockCursor()
+	public void LockCursor()
 	{
 		Cursor.lockState = CursorLockMode.Locked;
 		Cursor.visible = false;
 	}
-	void UnlockCursor()
+	public void UnlockCursor()
 	{
 		Cursor.lockState = CursorLockMode.None;
 		Cursor.visible = true;
@@ -269,41 +265,5 @@ public class PlayerController : MonoBehaviour
 		controller.enabled = true;
 	}
 
-	#region Pause and Menu Buttons
-
-	void HandlePauseMenu()
-	{
-		if (Input.GetKeyDown(KeyCode.Tab))
-		{
-			if (isPaused)
-			{
-				pauseMenu.SetActive(false);
-				LockCursor();
-				isPaused = false;
-				Time.timeScale = 1;
-			}
-			else
-			{
-				pauseMenu.SetActive(true);
-				UnlockCursor();
-				isPaused = true;
-				Time.timeScale = 0;
-			}
-		}
-	}
 	
-	public void ResumeGame()
-	{
-		pauseMenu.SetActive(false);
-		LockCursor();
-		isPaused = false;
-		Time.timeScale = 1;
-	}
-	
-	public void LoadMainMenu()
-	{
-		SceneManager.LoadScene("MainMenu");
-	}
-	
-	#endregion
 }
