@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 public class InventoryItem : MonoBehaviour,
 	IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-	public InventoryItemData itemData;
+	public ItemData itemData;
 	public Image itemIcon;
 	public CanvasGroup canvasGroup;
 	public Transform originalParent;
@@ -16,7 +16,7 @@ public class InventoryItem : MonoBehaviour,
 		itemIcon = GetComponent<Image>();
 	}
 
-	public void Initialize(InventoryItemData data)
+	public void Initialize(ItemData data)
 	{
 		itemData = data;
 		if (itemIcon != null && data != null)
