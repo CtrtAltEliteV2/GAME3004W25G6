@@ -33651,6 +33651,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 32730363108461969, guid: f012a7f959d83a94a86811a58c85a4a8,
+        type: 3}
+      propertyPath: hitSound
+      value: 
+      objectReference: {fileID: 8300000, guid: fde839f730953974ab781cacf491393f, type: 3}
+    - target: {fileID: 32730363108461969, guid: f012a7f959d83a94a86811a58c85a4a8,
+        type: 3}
+      propertyPath: destroySound
+      value: 
+      objectReference: {fileID: 8300000, guid: c65a4fbf832f2a848931f9979b9b8f22, type: 3}
     - target: {fileID: 1705159410686624944, guid: f012a7f959d83a94a86811a58c85a4a8,
         type: 3}
       propertyPath: m_LocalPosition.x

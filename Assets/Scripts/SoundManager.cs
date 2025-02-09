@@ -9,6 +9,7 @@ public class SoundManager : MonoBehaviour
     [Header("Sound Clips")]
     public AudioClip walkingSound;
     public AudioClip hitSound;
+    public AudioClip destroySound;
     public AudioClip damageSound;
     public AudioClip deathSound;
     public AudioClip healthPickupSound;
@@ -48,6 +49,11 @@ public class SoundManager : MonoBehaviour
     public void PlayHitSound()
     {
         audioSource.PlayOneShot(hitSound);
+    }
+    
+    public void PlayDestroySound()
+    {
+        audioSource.PlayOneShot(destroySound);
     }
 
     public void PlayDamageSound()
