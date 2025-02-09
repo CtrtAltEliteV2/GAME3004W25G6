@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -34,6 +35,9 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] private Button optionsButton;
 	[SerializeField] private Button mainMenuButton;
 	private bool isPaused = false;
+	
+	private bool isWalking = false;
+	private Coroutine footstepCoroutine;
 
 	void Start()
 	{
@@ -180,6 +184,37 @@ public class PlayerController : MonoBehaviour
 		// Move the player
 		Vector3 finalMoveDirection = moveDirection + Vector3.up * velocity.y;
 		controller.Move(finalMoveDirection * Time.deltaTime);
+		
+		// Play walking sound if the player is moving using a coroutine, basic implementation, needs to be improved
+		// for when the player walks on different surfaces and is affected by different speeds, or is airborne.
+		if (moveX != 0 || moveZ != 0)
+		{
+			if (!isWalking)
+			{
+				isWalking = true;
+				footstepCoroutine = StartCoroutine(PlayFootstepSounds());
+			}
+		}
+		else
+		{
+			if (isWalking)
+			{
+				isWalking = false;
+				if (footstepCoroutine != null)
+				{
+					StopCoroutine(footstepCoroutine);
+				}
+			}
+		}
+	}
+	
+	IEnumerator PlayFootstepSounds()
+	{
+		while (isWalking)
+		{
+			SoundManager.Instance.PlayWalkingSound();
+			yield return new WaitForSeconds(0.5f); // Adjust the interval as needed
+		}
 	}
 
 	void HandleMouseLook()

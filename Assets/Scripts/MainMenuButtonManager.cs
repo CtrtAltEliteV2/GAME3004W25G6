@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 //Temporary script to manage the main menu buttons, will probably stay as the main menu will be simple, and
-// be upgraded/changed as necessary.
+//be upgraded/changed as necessary.
 
 //There's a current bug, when quitting to the main menu from the game, the character will be unable to move until the pause
 //menu is opened and closed again. This is due to the Time.timeScale being set to 0 when the main menu is loaded. Temporarily fixed it
