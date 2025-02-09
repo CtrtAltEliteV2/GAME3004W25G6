@@ -31,12 +31,21 @@ public class InventorySaveData
 }
 
 [Serializable]
-public class GroundItemSaveData
+public class GroundObjectSaveData
 {
 	public string itemID;
 	public float[] position;
 	public float[] rotation;
 	public float[] scale;
+}
+[Serializable]
+public class MineableObjectSaveData
+{
+	public string itemID;
+	public float[] position;
+	public float[] rotation;
+	public float[] scale;
+	public int durability;
 }
 
 [Serializable]
@@ -44,7 +53,8 @@ public class GameData
 {
 	public PlayerData player;
 	public InventorySaveData[] inventory;
-	public GroundItemSaveData[] groundItems;
+	public GroundObjectSaveData[] groundItems;
+	public MineableObjectSaveData[] mineableObjects;
 }
 
 public static class SaveManager
@@ -75,12 +85,12 @@ public static class SaveManager
 		gameData.inventory = inventoryManager.GetInventorySaveData();
 
 		// Save Ground Items.
-		GroundItem[] groundItems = GameObject.FindObjectsOfType<GroundItem>();
-		List<GroundItemSaveData> groundSaveList = new List<GroundItemSaveData>();
-		foreach (GroundItem gi in groundItems)
+		GroundObject[] groundItems = GameObject.FindObjectsOfType<GroundObject>();
+		List<GroundObjectSaveData> groundSaveList = new List<GroundObjectSaveData>();
+		foreach (GroundObject gi in groundItems)
 		{
 			if (gi.item == null) continue;
-			GroundItemSaveData saveData = new GroundItemSaveData();
+			GroundObjectSaveData saveData = new GroundObjectSaveData();
 			saveData.itemID = gi.item.ItemID;
 			Vector3 pos = gi.transform.position;
 			saveData.position = new float[] { pos.x, pos.y, pos.z };
@@ -92,9 +102,26 @@ public static class SaveManager
 		}
 		gameData.groundItems = groundSaveList.ToArray();
 
+		MineableObject[] mineableObjects = GameObject.FindObjectsOfType<MineableObject>();
+		List<MineableObjectSaveData> mineableSaveList = new List<MineableObjectSaveData>();
+		foreach (MineableObject mo in mineableObjects)
+		{
+			if (mo.item == null) continue;
+			MineableObjectSaveData saveData = new MineableObjectSaveData();
+			saveData.itemID = mo.item.ItemID;
+			Vector3 pos = mo.transform.position;
+			saveData.position = new float[] { pos.x, pos.y, pos.z };
+			Vector3 rot = mo.transform.eulerAngles;
+			saveData.rotation = new float[] { rot.x, rot.y, rot.z };
+			Vector3 scale = mo.transform.localScale;
+			saveData.scale = new float[] { scale.x, scale.y, scale.z };
+			saveData.durability = mo.durability;
+			
+			mineableSaveList.Add(saveData);
+		}
+		gameData.mineableObjects = mineableSaveList.ToArray();
 		if (!Directory.Exists(saveDirectory))
 			Directory.CreateDirectory(saveDirectory);
-
 		string json = JsonUtility.ToJson(gameData, true);
 		File.WriteAllText(saveFilePath, json);
 		Debug.Log("Game saved to " + saveFilePath);
@@ -130,14 +157,14 @@ public static class SaveManager
 			inventoryManager.SetSelectedHotbarSlot(-1);
 
 			// Remove existing ground items.
-			GroundItem[] existingGroundItems = GameObject.FindObjectsOfType<GroundItem>();
-			foreach (GroundItem gi in existingGroundItems)
+			GroundObject[] existingGroundItems = GameObject.FindObjectsOfType<GroundObject>();
+			foreach (GroundObject gi in existingGroundItems)
 				GameObject.Destroy(gi.gameObject);
 
 			// Load Ground Items.
-			foreach (GroundItemSaveData giData in gameData.groundItems)
+			foreach (GroundObjectSaveData giData in gameData.groundItems)
 			{
-				InventoryItemData itemData = ItemDatabase.GetItemByID(giData.itemID);
+				ItemData itemData = ItemDatabase.GetItemByID(giData.itemID);
 				if (itemData != null && itemData.itemPrefab != null)
 				{
 					Vector3 groundPos = new Vector3(giData.position[0], giData.position[1], giData.position[2]);
@@ -149,16 +176,47 @@ public static class SaveManager
 					
 
 					// Ensure GroundItem script is linked
-					GroundItem groundItem = obj.GetComponent<GroundItem>();
+					GroundObject groundItem = obj.GetComponent<GroundObject>();
 					if (groundItem == null)
 					{
-						groundItem = obj.AddComponent<GroundItem>();
+						groundItem = obj.AddComponent<GroundObject>();
 					}
 					groundItem.item = itemData;
 				}
 				else
 				{
 					Debug.LogWarning("Item not found for ID: " + giData.itemID);
+				}
+			}
+
+			// Remove existing mineable objects.
+			MineableObject[] existingMineableObjects = GameObject.FindObjectsOfType<MineableObject>();
+			foreach (MineableObject mo in existingMineableObjects)
+				GameObject.Destroy(mo.gameObject);
+
+			// Load Mineable Objects.
+			foreach (MineableObjectSaveData moData in gameData.mineableObjects)
+			{
+				ItemData itemData = ItemDatabase.GetItemByID(moData.itemID);
+				if (itemData != null && itemData.itemPrefab != null)
+				{
+					Vector3 mineablePos = new Vector3(moData.position[0], moData.position[1], moData.position[2]);
+					Vector3 mineableRot = new Vector3(moData.rotation[0], moData.rotation[1], moData.rotation[2]);
+					Vector3 mineableScale = new Vector3(moData.scale[0], moData.scale[1], moData.scale[2]);
+					var obj = GameObject.Instantiate(itemData.itemPrefab, mineablePos, Quaternion.Euler(mineableRot));
+					obj.transform.localScale = mineableScale;
+					// Ensure MineableObject script is linked
+					MineableObject mineableObject = obj.GetComponent<MineableObject>();
+					if (mineableObject == null)
+					{
+						mineableObject = obj.AddComponent<MineableObject>();
+					}
+					mineableObject.item = itemData;
+					mineableObject.durability = moData.durability;
+				}
+				else
+				{
+					Debug.LogWarning("Item not found for ID: " + moData.itemID);
 				}
 			}
 

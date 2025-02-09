@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
-	[SerializeField] private InventoryItemData[] startingItems;
+	[SerializeField] private ItemData[] startingItems;
 
 	private InventorySlot[] hotbarSlots;
 	private InventorySlot[] extendedSlots;
@@ -160,7 +160,7 @@ public class InventoryManager : MonoBehaviour
 		}
 	}
 
-	public void AddItem(InventoryItemData newItem)
+	public void AddItem(ItemData newItem)
 	{
 		if (newItem == null) return;
 		bool added = inventory.TryAddItem(newItem);
@@ -181,7 +181,7 @@ public class InventoryManager : MonoBehaviour
 	{
 		inventory.SwapItems(indexA, indexB);
 	}
-	public InventoryItemData[] GetInventoryItemData()
+	public ItemData[] GetInventoryItemData()
 	{
 		return inventory.GetItemData();
 	}
@@ -194,7 +194,7 @@ public class InventoryManager : MonoBehaviour
 	}
 	public InventorySaveData[] GetInventorySaveData()
 	{
-		InventoryItemData[] items = inventory.GetItemData();
+		ItemData[] items = inventory.GetItemData();
 		InventorySaveData[] saveData = new InventorySaveData[items.Length];
 		for (int i = 0; i < items.Length; i++)
 		{
@@ -214,7 +214,7 @@ public class InventoryManager : MonoBehaviour
 			if (saveData[i] != null)
 			{
 				string id = saveData[i].itemID;
-				InventoryItemData itemData = ItemDatabase.GetItemByID(id);
+				ItemData itemData = ItemDatabase.GetItemByID(id);
 				if (itemData != null)
 					inventory.SetItem(i, itemData);
 			}

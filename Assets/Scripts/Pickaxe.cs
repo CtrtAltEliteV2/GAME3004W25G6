@@ -13,10 +13,6 @@ public class Pickaxe : MonoBehaviour, IUsable
 
 		// Retrieve the player's camera from the parent hierarchy
 		playerCamera = GetComponentInParent<Camera>();
-		if (playerCamera == null)
-		{
-			Debug.LogError("Player's Camera component not found in parent hierarchy.");
-		}
 	}
 
 	public void Use()

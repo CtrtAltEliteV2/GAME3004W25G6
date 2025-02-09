@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Scriptable Objects/InventoryItem")]
-public class InventoryItemData : ScriptableObject
+public class ItemData : ScriptableObject
 {
 	[Header("Identification")]
 	[SerializeField, HideInInspector] private string itemID; // Hidden in Inspector
