@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 56419010da9da12489fabdf0ad8402ed, type: 3}
-  m_Name: Pickaxe
+  m_Name: MineableCube
   m_EditorClassIdentifier: 
-  itemID: 989d2918-4953-43b5-abae-19a4c4433f97
-  itemName: Pickaxe
-  itemDescription: Used for mining
-  itemIcon: {fileID: 21300000, guid: b03c62ab4e7c0b54fb54be3bde9b1a21, type: 3}
-  itemPrefab: {fileID: 4899291284461531402, guid: c6279b2c7a8393c4aa6612ad4eb7fa76,
+  itemID: 12c78ee4-5c08-4ef1-bbc4-d7426652b342
+  itemName: MineableCube
+  itemDescription: MineableCube
+  itemIcon: {fileID: 21300000, guid: f5deae6aebf204244a73de8b9e8305d8, type: 3}
+  itemPrefab: {fileID: 3570281577781055269, guid: e082f58b1b9b31a44912aa0659daa6f3,
     type: 3}
