@@ -23933,6 +23933,57 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -3256971659059341589, guid: 4141b0bfe86b59b49b1688039ccf70a4, type: 3}
+--- !u!1 &1683073102
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1683073104}
+  - component: {fileID: 1683073103}
+  m_Layer: 0
+  m_Name: MapGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1683073103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683073102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 343bcf7ccbeaae540ad5abc3586efbf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapSize: {x: 100, y: 100}
+  numberOfItems: 25
+  itemsToSpawn:
+  - {fileID: 11400000, guid: 939cf1285c8199e4fa789c5d1abf3d56, type: 2}
+  - {fileID: 11400000, guid: a81dd4cae00d20642a58cdcfe8c3188f, type: 2}
+  - {fileID: 11400000, guid: ab3a4fc36855bc34a8cd3edd41831d15, type: 2}
+  - {fileID: 11400000, guid: e7cd127913bdebd47abb930967048037, type: 2}
+--- !u!4 &1683073104
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683073102}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.091826, y: 0.9954759, z: -1.8757374}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1683618951
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33495,3 +33546,4 @@ SceneRoots:
   - {fileID: 5981469431751672139}
   - {fileID: 962031704636570525}
   - {fileID: 979661974}
+  - {fileID: 1683073104}
