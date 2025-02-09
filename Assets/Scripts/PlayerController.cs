@@ -240,14 +240,23 @@ public class PlayerController : MonoBehaviour
 			return;
 		}
 		Debug.Log("Using item: " + selectedItem.itemData.itemName);
+		IUsable usable = heldItemParent.GetComponentInChildren<IUsable>();
+		if (usable != null)
+		{
+			usable.Use();
+		}
+		else
+		{
+			Debug.Log("Selected item has no usable behavior.");
+		}
 	}
 	void SaveGame()
 	{
-		SaveManager.SaveGame(this, playerStats, inventoryManager.GetInventoryItemData());
+		SaveManager.SaveGame(this, playerStats, inventoryManager);
 	}
 	void LoadGame()
 	{
-		SaveManager.LoadGame(this);
+		SaveManager.LoadGame(this, playerStats, inventoryManager);
 	}
 	public void ResetMovement()
 	{
@@ -264,6 +273,20 @@ public class PlayerController : MonoBehaviour
 	{
 		controller.enabled = true;
 	}
+	public void RemoveHeldItems()
+	{
+		if (heldItemParent != null)
+		{
+			foreach (Transform child in heldItemParent.transform)
+			{
+				Destroy(child.gameObject);
+			}
+		}
+		else
+		{
+			Debug.LogError("HeldItemParent GameObject is not assigned.");
+		}
+	}
 
-	
+
 }
