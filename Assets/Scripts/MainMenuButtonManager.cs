@@ -27,6 +27,11 @@ public class MainMenuButtonManager : MonoBehaviour
         Application.Quit();
     }
     
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+    
     private void OnEnable()
     {
         // Ensure time scale is reset to 1 when the main menu is loaded
