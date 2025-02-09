@@ -1,513 +1,122 @@
 {
-    "player": {
-        "position": [
-            0.7134936451911926,
-            1.5594080686569214,
-            -10.946870803833008
-        ],
-        "rotation": [
-            16.50066566467285,
-            172.4999237060547,
-            0.0
-        ],
-        "scale": [
-            1.0,
-            1.0,
-            1.0
-        ],
-        "stats": {
-            "health": 100.0,
-            "hunger": 100.0,
-            "thirst": 100.0,
-            "stamina": 100.0
-        },
-        "equippedSlot": -1
+    "position": [
+        0.9091712236404419,
+        1.5708123445510865,
+        1.8777230978012086
+    ],
+    "rotation": [
+        11.000797271728516,
+        44.49965286254883,
+        0.0
+    ],
+    "stats": {
+        "health": 100.0,
+        "hunger": 100.0,
+        "thirst": 100.0,
+        "stamina": 100.0
     },
     "inventory": [
         {
-            "itemID": "22768514-605f-4733-a445-c8e66db27627"
+            "instanceID": 25770
         },
         {
-            "itemID": "989d2918-4953-43b5-abae-19a4c4433f97"
+            "instanceID": 0
         },
         {
-            "itemID": ""
+            "instanceID": 0
         },
         {
-            "itemID": ""
+            "instanceID": 0
         },
         {
-            "itemID": ""
+            "instanceID": 0
         },
         {
-            "itemID": ""
+            "instanceID": 0
         },
         {
-            "itemID": ""
+            "instanceID": 0
         },
         {
-            "itemID": ""
+            "instanceID": 0
         },
         {
-            "itemID": ""
+            "instanceID": 0
         },
         {
-            "itemID": ""
+            "instanceID": 0
         },
         {
-            "itemID": ""
+            "instanceID": 0
         },
         {
-            "itemID": ""
+            "instanceID": 0
         },
         {
-            "itemID": ""
+            "instanceID": 0
         },
         {
-            "itemID": ""
+            "instanceID": 0
         },
         {
-            "itemID": ""
+            "instanceID": 0
         },
         {
-            "itemID": ""
+            "instanceID": 0
         },
         {
-            "itemID": ""
+            "instanceID": 0
         },
         {
-            "itemID": ""
+            "instanceID": 0
         },
         {
-            "itemID": ""
+            "instanceID": 0
         },
         {
-            "itemID": ""
+            "instanceID": 0
         },
         {
-            "itemID": ""
+            "instanceID": 0
         },
         {
-            "itemID": ""
+            "instanceID": 0
         },
         {
-            "itemID": ""
+            "instanceID": 0
         },
         {
-            "itemID": ""
+            "instanceID": 0
         },
         {
-            "itemID": ""
+            "instanceID": 0
         },
         {
-            "itemID": ""
+            "instanceID": 0
         },
         {
-            "itemID": ""
+            "instanceID": 0
         },
         {
-            "itemID": ""
+            "instanceID": 0
         },
         {
-            "itemID": ""
+            "instanceID": 0
         },
         {
-            "itemID": ""
+            "instanceID": 0
         },
         {
-            "itemID": ""
+            "instanceID": 0
         },
         {
-            "itemID": ""
+            "instanceID": 0
         },
         {
-            "itemID": ""
+            "instanceID": 0
         },
         {
-            "itemID": ""
-        }
-    ],
-    "groundItems": [],
-    "mineableObjects": [
-        {
-            "itemID": "0e6382e8-f83b-4657-ae36-29bbb67ccaf7",
-            "position": [
-                0.5715303421020508,
-                0.0,
-                -14.221396446228028
-            ],
-            "rotation": [
-                0.0,
-                90.0,
-                0.0
-            ],
-            "scale": [
-                15.0,
-                15.0,
-                15.0
-            ],
-            "durability": 3
-        },
-        {
-            "itemID": "0e6382e8-f83b-4657-ae36-29bbb67ccaf7",
-            "position": [
-                21.077667236328126,
-                0.0,
-                24.57594108581543
-            ],
-            "rotation": [
-                0.000009334667083749082,
-                0.0,
-                0.0
-            ],
-            "scale": [
-                15.0,
-                15.0,
-                15.0
-            ],
-            "durability": 3
-        },
-        {
-            "itemID": "0e6382e8-f83b-4657-ae36-29bbb67ccaf7",
-            "position": [
-                65.07766723632813,
-                0.0,
-                6.775944709777832
-            ],
-            "rotation": [
-                0.0,
-                90.0,
-                0.0
-            ],
-            "scale": [
-                15.0,
-                15.0,
-                15.0
-            ],
-            "durability": 3
-        },
-        {
-            "itemID": "0e6382e8-f83b-4657-ae36-29bbb67ccaf7",
-            "position": [
-                -5.590165138244629,
-                0.0,
-                31.608158111572267
-            ],
-            "rotation": [
-                0.0,
-                270.0,
-                0.0
-            ],
-            "scale": [
-                15.0,
-                15.0,
-                15.0
-            ],
-            "durability": 3
-        },
-        {
-            "itemID": "0e6382e8-f83b-4657-ae36-29bbb67ccaf7",
-            "position": [
-                -15.634381294250489,
-                0.0,
-                2.265172004699707
-            ],
-            "rotation": [
-                0.0,
-                270.0,
-                0.0
-            ],
-            "scale": [
-                15.0,
-                15.0,
-                15.0
-            ],
-            "durability": 3
-        },
-        {
-            "itemID": "0e6382e8-f83b-4657-ae36-29bbb67ccaf7",
-            "position": [
-                20.53766632080078,
-                0.0,
-                -28.62405776977539
-            ],
-            "rotation": [
-                0.0,
-                90.0,
-                0.0
-            ],
-            "scale": [
-                15.0,
-                15.0,
-                15.0
-            ],
-            "durability": 3
-        },
-        {
-            "itemID": "0e6382e8-f83b-4657-ae36-29bbb67ccaf7",
-            "position": [
-                30.309837341308595,
-                0.0,
-                51.608158111572269
-            ],
-            "rotation": [
-                0.0,
-                270.0,
-                0.0
-            ],
-            "scale": [
-                15.0,
-                15.0,
-                15.0
-            ],
-            "durability": 3
-        },
-        {
-            "itemID": "0e6382e8-f83b-4657-ae36-29bbb67ccaf7",
-            "position": [
-                46.65983963012695,
-                0.0,
-                -13.051840782165528
-            ],
-            "rotation": [
-                0.0,
-                90.0,
-                0.0
-            ],
-            "scale": [
-                15.0,
-                15.0,
-                15.0
-            ],
-            "durability": 3
-        },
-        {
-            "itemID": "0e6382e8-f83b-4657-ae36-29bbb67ccaf7",
-            "position": [
-                46.66017150878906,
-                0.0,
-                29.821224212646486
-            ],
-            "rotation": [
-                0.0,
-                90.0,
-                0.0
-            ],
-            "scale": [
-                15.0,
-                15.0,
-                15.0
-            ],
-            "durability": 3
-        },
-        {
-            "itemID": "dd85862d-02e5-4e48-9ecb-44e988e60a67",
-            "position": [
-                42.426204681396487,
-                0.0,
-                -32.0814094543457
-            ],
-            "rotation": [
-                0.0,
-                90.0,
-                0.0
-            ],
-            "scale": [
-                15.0,
-                15.0,
-                15.0
-            ],
-            "durability": 3
-        },
-        {
-            "itemID": "dd85862d-02e5-4e48-9ecb-44e988e60a67",
-            "position": [
-                42.426536560058597,
-                0.0,
-                10.791659355163575
-            ],
-            "rotation": [
-                0.0,
-                90.0,
-                0.0
-            ],
-            "scale": [
-                15.0,
-                15.0,
-                15.0
-            ],
-            "durability": 3
-        },
-        {
-            "itemID": "dd85862d-02e5-4e48-9ecb-44e988e60a67",
-            "position": [
-                -3.662104606628418,
-                0.0,
-                -33.2509651184082
-            ],
-            "rotation": [
-                0.0,
-                90.0,
-                0.0
-            ],
-            "scale": [
-                15.0,
-                15.0,
-                15.0
-            ],
-            "durability": 3
-        },
-        {
-            "itemID": "dd85862d-02e5-4e48-9ecb-44e988e60a67",
-            "position": [
-                -9.823800086975098,
-                0.0,
-                12.578591346740723
-            ],
-            "rotation": [
-                0.0,
-                270.0,
-                0.0
-            ],
-            "scale": [
-                15.0,
-                15.0,
-                15.0
-            ],
-            "durability": 3
-        },
-        {
-            "itemID": "dd85862d-02e5-4e48-9ecb-44e988e60a67",
-            "position": [
-                -19.86801528930664,
-                0.0,
-                -16.76439666748047
-            ],
-            "rotation": [
-                0.0,
-                270.0,
-                0.0
-            ],
-            "scale": [
-                15.0,
-                15.0,
-                15.0
-            ],
-            "durability": 3
-        },
-        {
-            "itemID": "dd85862d-02e5-4e48-9ecb-44e988e60a67",
-            "position": [
-                26.076202392578126,
-                0.0,
-                32.578590393066409
-            ],
-            "rotation": [
-                0.0,
-                270.0,
-                0.0
-            ],
-            "scale": [
-                15.0,
-                15.0,
-                15.0
-            ],
-            "durability": 3
-        },
-        {
-            "itemID": "dd85862d-02e5-4e48-9ecb-44e988e60a67",
-            "position": [
-                16.844032287597658,
-                0.0,
-                5.5463762283325199
-            ],
-            "rotation": [
-                0.0,
-                0.0,
-                0.0
-            ],
-            "scale": [
-                15.0,
-                15.0,
-                15.0
-            ],
-            "durability": 3
-        },
-        {
-            "itemID": "dd85862d-02e5-4e48-9ecb-44e988e60a67",
-            "position": [
-                16.304031372070314,
-                0.0,
-                -47.65362548828125
-            ],
-            "rotation": [
-                0.0,
-                90.0,
-                0.0
-            ],
-            "scale": [
-                15.0,
-                15.0,
-                15.0
-            ],
-            "durability": 3
-        },
-        {
-            "itemID": "dd85862d-02e5-4e48-9ecb-44e988e60a67",
-            "position": [
-                42.426536560058597,
-                0.0,
-                10.791659355163575
-            ],
-            "rotation": [
-                0.0,
-                90.0,
-                0.0
-            ],
-            "scale": [
-                15.0,
-                15.0,
-                15.0
-            ],
-            "durability": 3
-        },
-        {
-            "itemID": "dd85862d-02e5-4e48-9ecb-44e988e60a67",
-            "position": [
-                42.426204681396487,
-                0.0,
-                -32.0814094543457
-            ],
-            "rotation": [
-                0.0,
-                90.0,
-                0.0
-            ],
-            "scale": [
-                15.0,
-                15.0,
-                15.0
-            ],
-            "durability": 3
-        },
-        {
-            "itemID": "dd85862d-02e5-4e48-9ecb-44e988e60a67",
-            "position": [
-                60.84403610229492,
-                0.0,
-                -12.253623008728028
-            ],
-            "rotation": [
-                0.0,
-                90.0,
-                0.0
-            ],
-            "scale": [
-                15.0,
-                15.0,
-                15.0
-            ],
-            "durability": 3
+            "instanceID": 0
         }
     ]
 }

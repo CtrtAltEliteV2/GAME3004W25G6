@@ -9,12 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56419010da9da12489fabdf0ad8402ed, type: 3}
+  m_Script: {fileID: 11500000, guid: 03fe39fc279f52047af86bb9ed0574c3, type: 3}
   m_Name: Torch
   m_EditorClassIdentifier: 
-  itemID: 22768514-605f-4733-a445-c8e66db27627
   itemName: Torch
-  itemDescription: Torch
+  itemDescription: Used to light your way
   itemIcon: {fileID: 21300000, guid: 479b6d74e851b51488afde1f985b57ec, type: 3}
-  itemPrefab: {fileID: 7812717722120899048, guid: 261aa830320fefc4e95347e996f1bcba,
-    type: 3}
+  itemPrefab: {fileID: 100000, guid: e118e6b855b985c44b90f9969eb3cd55, type: 3}

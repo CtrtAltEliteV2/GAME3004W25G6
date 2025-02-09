@@ -1,9 +1,9 @@
-using System;
 using UnityEngine;
 
-public class GroundObject : MonoBehaviour
+public class GroundItem : MonoBehaviour
 {
-	public ItemData item;
+	// Reference to the InventoryItem ScriptableObject representing this item.
+	public InventoryItemData item;
 
 	private void OnTriggerEnter(Collider other)
 	{
@@ -13,6 +13,7 @@ public class GroundObject : MonoBehaviour
 			InventoryManager inventoryUI = other.GetComponent<InventoryManager>();
 			if (inventoryUI != null && item != null)
 			{
+				// Add the item to the extended inventory (or hotbar, as you prefer).
 				inventoryUI.AddItem(item);
 				Destroy(gameObject);
 			}

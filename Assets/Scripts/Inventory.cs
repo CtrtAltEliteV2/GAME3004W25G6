@@ -2,7 +2,7 @@ using System;
 
 public class Inventory
 {
-	private ItemData[] items;
+	private InventoryItemData[] items;
 	private int totalSize;
 	private int hotbarSize;
 
@@ -12,10 +12,10 @@ public class Inventory
 	{
 		this.totalSize = totalSize;
 		this.hotbarSize = hotbarSize;
-		items = new ItemData[totalSize];
+		items = new InventoryItemData[totalSize];
 	}
 
-	public bool TryAddItem(ItemData newItem)
+	public bool TryAddItem(InventoryItemData newItem)
 	{
 		// Fill hotbar indices first
 		for (int i = 0; i < hotbarSize; i++)
@@ -39,13 +39,13 @@ public class Inventory
 		return false;
 	}
 
-	public ItemData GetItem(int index)
+	public InventoryItemData GetItem(int index)
 	{
 		if (index < 0 || index >= totalSize) return null;
 		return items[index];
 	}
 
-	public void SetItem(int index, ItemData data)
+	public void SetItem(int index, InventoryItemData data)
 	{
 		if (index < 0 || index >= totalSize) return;
 		items[index] = data;
@@ -68,7 +68,7 @@ public class Inventory
 		OnInventoryChanged?.Invoke();
 	}
 
-	public ItemData[] GetItemData()
+	public InventoryItemData[] GetItemData()
 	{
 		return items;
 	}
