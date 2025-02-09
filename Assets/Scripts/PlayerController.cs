@@ -209,6 +209,15 @@ public class PlayerController : MonoBehaviour
 			return;
 		}
 		Debug.Log("Using item: " + selectedItem.itemData.itemName);
+		IUsable usable = heldItemParent.GetComponentInChildren<IUsable>();
+		if (usable != null)
+		{
+			usable.Use();
+		}
+		else
+		{
+			Debug.Log("Selected item has no usable behavior.");
+		}
 	}
 
 	// The saving and loading functions can be called from anywhere. They are just here as a placeholder.

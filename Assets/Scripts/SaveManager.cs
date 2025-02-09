@@ -146,12 +146,7 @@ public static class SaveManager
 					var obj = GameObject.Instantiate(itemData.itemPrefab, groundPos, Quaternion.Euler(groundRot));
 					obj.transform.localScale = groundScale;
 
-					// Ensure collider is present
-					if (obj.GetComponent<Collider>() == null)
-					{
-						var collider = obj.AddComponent<SphereCollider>();
-						collider.isTrigger = true;
-					}
+					
 
 					// Ensure GroundItem script is linked
 					GroundItem groundItem = obj.GetComponent<GroundItem>();
