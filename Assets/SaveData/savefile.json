@@ -1,122 +1,150 @@
 {
-    "position": [
-        0.9091712236404419,
-        1.5708123445510865,
-        1.8777230978012086
-    ],
-    "rotation": [
-        11.000797271728516,
-        44.49965286254883,
-        0.0
-    ],
-    "stats": {
-        "health": 100.0,
-        "hunger": 100.0,
-        "thirst": 100.0,
-        "stamina": 100.0
+    "player": {
+        "position": [
+            0.1267041265964508,
+            1.571328043937683,
+            0.04288595914840698
+        ],
+        "rotation": [
+            7.999990463256836,
+            21.50002098083496,
+            2.1554102147547383e-7
+        ],
+        "scale": [
+            1.0,
+            1.0,
+            1.0
+        ],
+        "stats": {
+            "health": 100.0,
+            "hunger": 100.0,
+            "thirst": 100.0,
+            "stamina": 100.0
+        },
+        "equippedSlot": -1
     },
     "inventory": [
         {
-            "instanceID": 25770
+            "itemID": "8aa5954e-5c53-4e61-825c-ada01511a3a7"
         },
         {
-            "instanceID": 0
+            "itemID": ""
         },
         {
-            "instanceID": 0
+            "itemID": ""
         },
         {
-            "instanceID": 0
+            "itemID": ""
         },
         {
-            "instanceID": 0
+            "itemID": ""
         },
         {
-            "instanceID": 0
+            "itemID": ""
         },
         {
-            "instanceID": 0
+            "itemID": ""
         },
         {
-            "instanceID": 0
+            "itemID": ""
         },
         {
-            "instanceID": 0
+            "itemID": ""
         },
         {
-            "instanceID": 0
+            "itemID": ""
         },
         {
-            "instanceID": 0
+            "itemID": ""
         },
         {
-            "instanceID": 0
+            "itemID": ""
         },
         {
-            "instanceID": 0
+            "itemID": ""
         },
         {
-            "instanceID": 0
+            "itemID": ""
         },
         {
-            "instanceID": 0
+            "itemID": ""
         },
         {
-            "instanceID": 0
+            "itemID": ""
         },
         {
-            "instanceID": 0
+            "itemID": ""
         },
         {
-            "instanceID": 0
+            "itemID": ""
         },
         {
-            "instanceID": 0
+            "itemID": ""
         },
         {
-            "instanceID": 0
+            "itemID": ""
         },
         {
-            "instanceID": 0
+            "itemID": ""
         },
         {
-            "instanceID": 0
+            "itemID": ""
         },
         {
-            "instanceID": 0
+            "itemID": ""
         },
         {
-            "instanceID": 0
+            "itemID": ""
         },
         {
-            "instanceID": 0
+            "itemID": ""
         },
         {
-            "instanceID": 0
+            "itemID": ""
         },
         {
-            "instanceID": 0
+            "itemID": ""
         },
         {
-            "instanceID": 0
+            "itemID": ""
         },
         {
-            "instanceID": 0
+            "itemID": ""
         },
         {
-            "instanceID": 0
+            "itemID": ""
         },
         {
-            "instanceID": 0
+            "itemID": ""
         },
         {
-            "instanceID": 0
+            "itemID": ""
         },
         {
-            "instanceID": 0
+            "itemID": ""
         },
         {
-            "instanceID": 0
+            "itemID": ""
+        }
+    ],
+    "groundItems": [
+        {
+            "itemID": "989d2918-4953-43b5-abae-19a4c4433f97",
+            "position": [
+                2.4059998989105226,
+                0.8399999737739563,
+                2.8299999237060549
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ]
         }
     ]
 }

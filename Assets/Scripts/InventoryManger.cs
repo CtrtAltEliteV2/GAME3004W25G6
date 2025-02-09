@@ -8,7 +8,7 @@ public class InventoryManager : MonoBehaviour
 	private InventorySlot[] hotbarSlots;
 	private InventorySlot[] extendedSlots;
 	private GameObject extendedPanel;
-	private int selectedHotbarSlot = -1;
+	public int selectedHotbarSlot = -1;
 
 	public Inventory inventory;
 	private const int HOTBAR_COUNT = 10;
@@ -124,7 +124,7 @@ public class InventoryManager : MonoBehaviour
 		return slot;
 	}
 
-	private void RefreshUI()
+	public void RefreshUI()
 	{
 		for (int i = 0; i < HOTBAR_COUNT; i++)
 		{
@@ -144,14 +144,15 @@ public class InventoryManager : MonoBehaviour
 		if (extendedPanel != null) extendedPanel.SetActive(!extendedPanel.activeSelf);
 	}
 
+	// Modified Method to Allow Deselecting
 	public void SetSelectedHotbarSlot(int i)
 	{
-		if (i < 0 || i >= HOTBAR_COUNT) return;
+		if (i < -1 || i >= HOTBAR_COUNT) return; // Allow -1 for deselection
 		selectedHotbarSlot = i;
 		UpdateHotbarUI();
 	}
 
-	private void UpdateHotbarUI()
+	public void UpdateHotbarUI()
 	{
 		for (int i = 0; i < HOTBAR_COUNT; i++)
 		{
@@ -183,5 +184,41 @@ public class InventoryManager : MonoBehaviour
 	public InventoryItemData[] GetInventoryItemData()
 	{
 		return inventory.GetItemData();
+	}
+	public void ClearAllSlots()
+	{
+		for (int i = 0; i < inventory.TotalSize; i++)
+		{
+			inventory.SetItem(i, null);
+		}
+	}
+	public InventorySaveData[] GetInventorySaveData()
+	{
+		InventoryItemData[] items = inventory.GetItemData();
+		InventorySaveData[] saveData = new InventorySaveData[items.Length];
+		for (int i = 0; i < items.Length; i++)
+		{
+			if (items[i] != null)
+				saveData[i] = new InventorySaveData() { itemID = items[i].ItemID };
+			else
+				saveData[i] = null;
+		}
+		return saveData;
+	}
+
+	public void LoadInventoryFromSaveData(InventorySaveData[] saveData)
+	{
+		ClearAllSlots();
+		for (int i = 0; i < saveData.Length; i++)
+		{
+			if (saveData[i] != null)
+			{
+				string id = saveData[i].itemID;
+				InventoryItemData itemData = ItemDatabase.GetItemByID(id);
+				if (itemData != null)
+					inventory.SetItem(i, itemData);
+			}
+		}
+		RefreshUI();
 	}
 }

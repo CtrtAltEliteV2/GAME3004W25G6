@@ -5,6 +5,7 @@ using UnityEngine;
 public class ConsumableItemData : InventoryItemData
 {
 	public float healthRestore;
+	public float staminaRestore;
 	public float hungerRestore;
 	public float thirstRestore;
 }
