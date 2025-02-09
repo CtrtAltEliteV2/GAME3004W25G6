@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
@@ -58,8 +59,9 @@ public class PlayerController : MonoBehaviour
 		}
 		LockCursor();
 		
-		// Add onClick to the resume button, this will be changed to a proper touch button input later
+		// Add onClick to the resume button and main menu button, this will be changed to a proper touch button input later
 		resumeButton.onClick.AddListener(ResumeGame);
+		mainMenuButton.onClick.AddListener(LoadMainMenu);
 	}
 
 	void Update()
@@ -263,7 +265,10 @@ public class PlayerController : MonoBehaviour
 		Time.timeScale = 1;
 	}
 	
+	public void LoadMainMenu()
+	{
+		SceneManager.LoadScene("MainMenu");
+	}
 	
-
 	#endregion
 }
