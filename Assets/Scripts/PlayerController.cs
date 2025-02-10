@@ -115,7 +115,17 @@ public class PlayerController : MonoBehaviour
 		int slotInput = inputManager.GetHotbarSlotInput();
 		if (slotInput != -1)
 		{
-			SelectHotbarSlot(slotInput);
+			if (inventoryManager.selectedHotbarSlot == slotInput)
+			{
+				// Deselect the currently selected slot
+				inventoryManager.SetSelectedHotbarSlot(-1);
+				RemoveHeldItems();
+			}
+			else
+			{
+				// Select a new slot
+				SelectHotbarSlot(slotInput);
+			}
 		}
 	}
 
