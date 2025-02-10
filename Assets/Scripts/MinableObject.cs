@@ -18,6 +18,7 @@ public class MineableObject : MonoBehaviour
 			Destroy(gameObject);
 			Debug.Log($"{gameObject.name} has been mined and destroyed.");
 			//Play sound or display particle effect
+			SoundManager.Instance.PlayDestroySound();
 		}
 	}
 }

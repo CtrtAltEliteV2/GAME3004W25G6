@@ -1,5 +1,7 @@
-// PlayerController.cs
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
@@ -24,6 +26,10 @@ public class PlayerController : MonoBehaviour
 	[Header("Inventory & Held Item")]
 	[Tooltip("The parent GameObject under which the held item prefab will be instantiated.")]
 	[SerializeField] private GameObject heldItemParent;
+	
+	
+	private bool isWalking = false;
+	private Coroutine footstepCoroutine;
 
 	void Start()
 	{
@@ -36,6 +42,7 @@ public class PlayerController : MonoBehaviour
 
 		if (heldItemParent == null)
 			Debug.LogError("HeldItemParent GameObject is not assigned in the Inspector.");
+
 
 		velocity = Vector3.zero;
 		moveDirection = Vector3.zero;
@@ -51,7 +58,6 @@ public class PlayerController : MonoBehaviour
 
 	void Update()
 	{
-		// The saving and loading functions can be called from anywhere. They are just here as a placeholder.
 		if (Input.GetKeyDown(KeyCode.O))
 		{
 			SaveGame();
@@ -77,6 +83,15 @@ public class PlayerController : MonoBehaviour
 		HandleInventoryInput();
 		HandleMovement();
 		HandleMouseLook();
+		HandlePauseMenuInput();
+	}
+    
+	void HandlePauseMenuInput()
+	{
+		if (Input.GetKeyDown(KeyCode.Tab))
+		{
+			PauseMenu.Instance.TogglePauseMenu();
+		}
 	}
 
 	void HandleInventoryInput()
@@ -95,23 +110,12 @@ public class PlayerController : MonoBehaviour
 			inventoryManager.ToggleExtendedInventory();
 		}
 	}
-
 	void HandleHotbarInput()
 	{
 		int slotInput = inputManager.GetHotbarSlotInput();
 		if (slotInput != -1)
 		{
-			if (inventoryManager.selectedHotbarSlot == slotInput)
-			{
-				// Deselect the currently selected slot
-				inventoryManager.SetSelectedHotbarSlot(-1);
-				RemoveHeldItems();
-			}
-			else
-			{
-				// Select a new slot
-				SelectHotbarSlot(slotInput);
-			}
+			SelectHotbarSlot(slotInput);
 		}
 	}
 
@@ -127,7 +131,18 @@ public class PlayerController : MonoBehaviour
 		inventoryManager.SetSelectedHotbarSlot(index);
 
 		// Remove any previously held item
-		RemoveHeldItems();
+		if (heldItemParent != null)
+		{
+			foreach (Transform child in heldItemParent.transform)
+			{
+				Destroy(child.gameObject);
+			}
+		}
+		else
+		{
+			Debug.LogError("HeldItemParent GameObject is not assigned.");
+			return;
+		}
 
 		// Get the InventoryItem from the selected slot and instantiate its prefab if available
 		InventoryItem selectedItem = inventoryManager.GetItemInHotbar(index);
@@ -139,20 +154,6 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-	public void RemoveHeldItems()
-	{
-		if (heldItemParent != null)
-		{
-			foreach (Transform child in heldItemParent.transform)
-			{
-				Destroy(child.gameObject);
-			}
-		}
-		else
-		{
-			Debug.LogError("HeldItemParent GameObject is not assigned.");
-		}
-	}
 
 	void HandleMovement()
 	{
@@ -179,26 +180,56 @@ public class PlayerController : MonoBehaviour
 		// Move the player
 		Vector3 finalMoveDirection = moveDirection + Vector3.up * velocity.y;
 		controller.Move(finalMoveDirection * Time.deltaTime);
+		
+		// Play walking sound if the player is moving using a coroutine, basic implementation, needs to be improved
+		// for when the player walks on different surfaces and is affected by different speeds, or is airborne.
+		if (moveX != 0 || moveZ != 0)
+		{
+			if (!isWalking)
+			{
+				isWalking = true;
+				footstepCoroutine = StartCoroutine(PlayFootstepSounds());
+			}
+		}
+		else
+		{
+			if (isWalking)
+			{
+				isWalking = false;
+				if (footstepCoroutine != null)
+				{
+					StopCoroutine(footstepCoroutine);
+				}
+			}
+		}
+	}
+	
+	IEnumerator PlayFootstepSounds()
+	{
+		while (isWalking)
+		{
+			SoundManager.Instance.PlayWalkingSound();
+			yield return new WaitForSeconds(0.5f); // Adjust the interval as needed
+		}
 	}
 
 	void HandleMouseLook()
 	{
+		if (PauseMenu.isPaused) return; //To prevent the player camera from moving around if paused.
+		
 		Vector2 mouseDelta = inputManager.GetMouseLookInput();
 		transform.rotation = Quaternion.Euler(transform.eulerAngles.x - mouseDelta.y, transform.eulerAngles.y + mouseDelta.x, 0);
 	}
-
-	void LockCursor()
+	public void LockCursor()
 	{
 		Cursor.lockState = CursorLockMode.Locked;
 		Cursor.visible = false;
 	}
-
-	void UnlockCursor()
+	public void UnlockCursor()
 	{
 		Cursor.lockState = CursorLockMode.None;
 		Cursor.visible = true;
 	}
-
 	void UseSelectedItem()
 	{
 		// Get the selected item from the inventory
@@ -219,8 +250,6 @@ public class PlayerController : MonoBehaviour
 			Debug.Log("Selected item has no usable behavior.");
 		}
 	}
-
-	// The saving and loading functions can be called from anywhere. They are just here as a placeholder.
 	void SaveGame()
 	{
 		SaveManager.SaveGame(this, playerStats, inventoryManager);
@@ -228,10 +257,6 @@ public class PlayerController : MonoBehaviour
 	void LoadGame()
 	{
 		SaveManager.LoadGame(this, playerStats, inventoryManager);
-		// **Ensure no item is selected after loading**
-		// This is already handled in SaveManager.LoadGame by setting selectedHotbarSlot to -1
-		// Additionally, remove any held items to reflect the deselection
-		RemoveHeldItems();
 	}
 	public void ResetMovement()
 	{
@@ -248,4 +273,20 @@ public class PlayerController : MonoBehaviour
 	{
 		controller.enabled = true;
 	}
+	public void RemoveHeldItems()
+	{
+		if (heldItemParent != null)
+		{
+			foreach (Transform child in heldItemParent.transform)
+			{
+				Destroy(child.gameObject);
+			}
+		}
+		else
+		{
+			Debug.LogError("HeldItemParent GameObject is not assigned.");
+		}
+	}
+
+
 }

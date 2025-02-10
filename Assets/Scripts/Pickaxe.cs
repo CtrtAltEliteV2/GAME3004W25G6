@@ -36,6 +36,9 @@ public class Pickaxe : MonoBehaviour, IUsable
 			if (mineable != null)
 			{
 				mineable.Mine();
+				
+				// Play hit sound when a mineable object is hit
+				SoundManager.Instance.PlayHitSound();
 
 				
 			}
