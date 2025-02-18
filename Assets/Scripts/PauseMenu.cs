@@ -8,18 +8,18 @@ public class PauseMenu : MonoBehaviour
 {
     public static PauseMenu Instance { get; private set; }
 
-    //Properties for the pause menu, button to open the pause menu, and the pause menu itself
-    //This is more like a temporary implementation, will be replaced with a more robust system later and on a different script.
     [Header("Pause Menu")]
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private Button resumeButton;
     [SerializeField] private Button optionsButton;
     [SerializeField] private Button mainMenuButton;
+
+    private AudioSource audioSource;
+    private AudioClip buttonClickSound;
+
     public static bool isPaused = false;
-    
     private PlayerController playerController;
-    // Start is called before the first frame update
-    
+
     void Awake()
     {
         if (Instance == null)
@@ -31,20 +31,40 @@ public class PauseMenu : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
+
     void Start()
     {
         isPaused = false;
         playerController = FindObjectOfType<PlayerController>();
+
         if (playerController == null)
         {
             Debug.LogError("PlayerController not found.");
         }
-        // Add onClick to the resume button and main menu button, this will be changed to a proper touch button input later
-        resumeButton.onClick.AddListener(ResumeGame);
-        mainMenuButton.onClick.AddListener(LoadMainMenu);
+
+        // Initialize AudioSource
+        audioSource = gameObject.AddComponent<AudioSource>();
+        buttonClickSound = Resources.Load<AudioClip>("Audio/ButtonPlate Click (Minecraft Sound) - Sound Effect for editing");
+
+        if (buttonClickSound == null)
+        {
+            Debug.LogError("Button click sound not found. Check the path.");
+        }
+
+        // Add onClick listeners with sound
+        resumeButton.onClick.AddListener(() => PlayButtonSound(ResumeGame));
+        mainMenuButton.onClick.AddListener(() => PlayButtonSound(LoadMainMenu));
     }
-    
+
+    private void PlayButtonSound(System.Action action)
+    {
+        if (buttonClickSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(buttonClickSound);
+        }
+        action.Invoke();
+    }
+
     #region Pause and Menu Buttons
 
     public void TogglePauseMenu()
@@ -61,7 +81,7 @@ public class PauseMenu : MonoBehaviour
             Time.timeScale = 0;
         }
     }
-	
+
     public void ResumeGame()
     {
         pauseMenu.SetActive(false);
@@ -69,11 +89,11 @@ public class PauseMenu : MonoBehaviour
         isPaused = false;
         Time.timeScale = 1;
     }
-	
+
     public void LoadMainMenu()
     {
         SceneManager.LoadScene("MainMenu");
     }
-	
+
     #endregion
 }
