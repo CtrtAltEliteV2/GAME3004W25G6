@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 //Temporary script to manage the main menu buttons, will probably stay as the main menu will be simple, and
 //be upgraded/changed as necessary.
 
@@ -12,26 +13,50 @@ using UnityEngine.SceneManagement;
 //of just the skybox if the game is loaded first from the MainMenu Scene.
 public class MainMenuButtonManager : MonoBehaviour
 {
+    private AudioSource audioSource;
+    private AudioClip buttonClickSound;
+
+    void Start()
+    {
+        // Initialize AudioSource
+        audioSource = gameObject.AddComponent<AudioSource>();
+        buttonClickSound = Resources.Load<AudioClip>("Audio/ButtonPlate Click (Minecraft Sound) - Sound Effect for editing");
+
+        if (buttonClickSound == null)
+        {
+            Debug.LogError("Button click sound not found. Check the path.");
+        }
+    }
+
     public void PlayGame()
     {
-        SceneManager.LoadScene("IntroScene");
+        PlayButtonSound(() => SceneManager.LoadScene("IntroScene"));
     }
-    
+
     public void Options()
     {
-        SceneManager.LoadScene("OptionsScene");
+        PlayButtonSound(() => SceneManager.LoadScene("OptionsScene"));
     }
-    
+
     public void QuitGame()
     {
-        Application.Quit();
+        PlayButtonSound(Application.Quit);
     }
-    
+
     public void LoadMainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        PlayButtonSound(() => SceneManager.LoadScene("MainMenu"));
     }
-    
+
+    private void PlayButtonSound(System.Action action)
+    {
+        if (buttonClickSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(buttonClickSound);
+        }
+        action.Invoke();
+    }
+
     private void OnEnable()
     {
         // Ensure time scale is reset to 1 when the main menu is loaded
