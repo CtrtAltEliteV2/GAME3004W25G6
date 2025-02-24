@@ -14,6 +14,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/OptionsScene.unity
     guid: 5b4b63071a7301e4fa94d96dc490a04d
+  - enabled: 1
+    path: Assets/Scenes/KeyMappingScene.unity
+    guid: 35b40087746509049a23646d3af1e8c0
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: ebec090210f73694daba83e3f45f7505,
       type: 2}
