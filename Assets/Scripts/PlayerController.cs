@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour
     
 	void HandlePauseMenuInput()
 	{
-		if (Input.GetKeyDown(KeyCode.Tab))
+		if (Input.GetKeyDown(KeyMapperManager.Instance.GetKeyMapping("PauseGame")))
 		{
 			PauseMenu.Instance.TogglePauseMenu();
 		}
@@ -167,7 +167,16 @@ public class PlayerController : MonoBehaviour
 
 	void HandleMovement()
 	{
-		Vector2 movementInput = inputManager.GetMovementInput();
+		
+		if (KeyMapperManager.Instance == null)
+		{
+			Debug.LogError("KeyMapperManager instance is not initialized.");
+			return;
+		}
+		Vector2 movementInput = new Vector2(
+			Input.GetKey(KeyMapperManager.Instance.GetKeyMapping("MoveRight")) ? 1 : Input.GetKey(KeyMapperManager.Instance.GetKeyMapping("MoveLeft")) ? -1 : 0,
+			Input.GetKey(KeyMapperManager.Instance.GetKeyMapping("MoveForward")) ? 1 : Input.GetKey(KeyMapperManager.Instance.GetKeyMapping("MoveBackward")) ? -1 : 0
+		);
 		float moveX = movementInput.x;
 		float moveZ = movementInput.y;
 
@@ -179,7 +188,7 @@ public class PlayerController : MonoBehaviour
 		moveDirection = Vector3.SmoothDamp(moveDirection, targetMoveDirection, ref smoothMoveVelocity, smoothTime);
 
 		// Handle jumping
-		if (inputManager.GetJumpInput() && controller.isGrounded)
+		if (Input.GetKeyDown(KeyMapperManager.Instance.GetKeyMapping("Jump")) && controller.isGrounded)
 		{
 			velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
 		}

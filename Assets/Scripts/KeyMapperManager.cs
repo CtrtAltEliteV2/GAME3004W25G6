@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class KeyMapperManager : MonoBehaviour
 {
-    public static KeyMapperManager Instance;
+    public static KeyMapperManager Instance { get; private set; }
 
     private Dictionary<string, KeyCode> keyMappings;
 
@@ -31,6 +31,7 @@ public class KeyMapperManager : MonoBehaviour
             { "MoveLeft", (KeyCode)PlayerPrefs.GetInt("MoveLeft", (int)KeyCode.A) },
             { "MoveRight", (KeyCode)PlayerPrefs.GetInt("MoveRight", (int)KeyCode.D) },
             { "Jump", (KeyCode)PlayerPrefs.GetInt("Jump", (int)KeyCode.Space) },
+            {"Inventory", (KeyCode)PlayerPrefs.GetInt("Inventory", (int)KeyCode.I) },
             { "UseItem", (KeyCode)PlayerPrefs.GetInt("UseItem", (int)KeyCode.E) },
             { "PauseGame", (KeyCode)PlayerPrefs.GetInt("PauseGame", (int)KeyCode.Tab) }
         };

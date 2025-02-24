@@ -26,7 +26,7 @@ public class InputManager : MonoBehaviour
 
 	public int GetHotbarSlotInput()
 	{
-		// Check keys 1-9 (which map to slot indices 0–8)
+		// Check keys 1-9 (which map to slot indices 0ï¿½8)
 		for (int i = 1; i <= 9; i++)
 		{
 			if (Input.GetKeyDown(i.ToString()))
@@ -44,7 +44,7 @@ public class InputManager : MonoBehaviour
 
 	public bool GetInventoryInput()
 	{
-		return Input.GetKeyDown(KeyCode.I);
+		return Input.GetKeyDown(KeyMapperManager.Instance.GetKeyMapping("Inventory"));
 	}
 	public bool GetUseInput()
 	{

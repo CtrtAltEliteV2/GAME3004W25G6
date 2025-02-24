@@ -37,6 +37,11 @@ public class MainMenuButtonManager : MonoBehaviour
     {
         PlayButtonSound(() => SceneManager.LoadScene("OptionsScene"));
     }
+    
+    public void KeyMappingScene()
+    {
+        PlayButtonSound(() => SceneManager.LoadScene("KeyMappingScene"));
+    }
 
     public void QuitGame()
     {
